@@ -3,18 +3,22 @@ public class Book {
     private String title;
     private String author;
     private String publishedBy;
+    private String publishingYear;
     private String category;
     private String status;
-    private User owner;
+    private int ownerNumber;
+    private String date;
 
-    public Book(int id, String title, String author, String publishedBy, String category, String status, User owner) {
+    public Book(int id, String title, String author, String publishedBy, String publishingYear, String category, String status, int ownerNumber, String date) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publishedBy = publishedBy;
+        this.publishingYear = publishingYear;
         this.category = category;
         this.status = status;
-        this.owner = owner;
+        this.ownerNumber = ownerNumber;
+        this.date = date;
     }
 
     public int getId() {
@@ -49,6 +53,14 @@ public class Book {
         this.publishedBy = publishedBy;
     }
 
+    public String getPublishingYear() {
+        return publishingYear;
+    }
+
+    public void setPublishingYear(String publishingYear) {
+        this.publishingYear = publishingYear;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -65,11 +77,19 @@ public class Book {
         this.status = status;
     }
 
-    public User getOwner() {
-        return owner;
+    public int getOwnerNumber() {
+        return ownerNumber;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerNumber(int ownerNumber) {
+        this.ownerNumber = ownerNumber;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

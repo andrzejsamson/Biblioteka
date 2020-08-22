@@ -1,18 +1,28 @@
 import java.util.ArrayList;
 
 public class User {
+    private int libraryCardNumber;
     private String firstName;
-    private String lastName;
+    private String secondName;
     private String address;
     private String phoneNumber;
     private String email;
 
-    public User(String firstName, String lastName, String address, String phoneNumber, String email) {
+    public User(int libraryCardNumber, String firstName, String secondName, String address, String phoneNumber, String email) {
+        this.libraryCardNumber = libraryCardNumber;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.secondName = secondName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public int getLibraryCardNumber() {
+        return libraryCardNumber;
+    }
+
+    public void setLibraryCardNumber(int libraryCardNumber) {
+        this.libraryCardNumber = libraryCardNumber;
     }
 
     public String getFirstName() {
@@ -23,12 +33,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getAddress() {
@@ -55,24 +65,27 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Book> search(ArrayList<Book> bookList) {
-        ArrayList<Book> searchingList = new ArrayList<>();
-        for(Book book : bookList) {
-            if(book.getStatus().equals("free")) {
-                searchingList.add(book);
-            }
+    public ArrayList<Book> search(Library library) {
+        if(library.getUsers().contains(this)) {
+            return library.getBooks();
+        } else {
+            System.out.println("You are not a user in this library");
         }
-        return searchingList;
+        return null;
     }
 
-    public void cancelReservation(Book book) {
-        if((book.getStatus().equals("reserved")) && (book.getOwner().equals(this))) {
-            book.setStatus("free");
-            book.setOwner(null);
-            System.out.println("Your reservation was cancelled successfully");
+    public boolean reservation(Library library, Book book) {
+        if(library.getUsers().contains(this)) {
+            for(Book books : library.getBooks()) {
+                if(books.equals(book) && books.getStatus().equals("free")) {
+                    books.setStatus("reserved");
+                    books.setOwnerNumber(this.getLibraryCardNumber());
+                    return true;
+                }
+            }
         } else {
-            System.out.println("Operation failed");
-            System.out.println("You can not cancel this reservation");
+            System.out.println("You are not a user in this library");
         }
+        return false;
     }
 }

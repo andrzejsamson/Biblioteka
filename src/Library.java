@@ -1,27 +1,37 @@
 import java.util.ArrayList;
 
 public class Library {
-    private String libraryName;
-    private ArrayList<Book> library;
+    private String name;
+    private ArrayList<Book> books;
+    private ArrayList<User> users;
 
-    public Library(String libraryName) {
-        this.libraryName = libraryName;
-        this.library = new ArrayList<>();
+    public Library(String name) {
+        this.name = name;
+        this.books = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
 
-    public String getLibraryName() {
-        return libraryName;
+    public String getName() {
+        return name;
     }
 
-    public void setLibraryName(String libraryName) {
-        this.libraryName = libraryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<Book> getLibrary() {
-        return library;
+    public ArrayList<Book> getBooks() {
+        return books;
     }
 
-    public void setLibrary(ArrayList<Book> library) {
-        this.library = library;
+    public void addBooks(Book book) {
+        this.books.add(book);
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void addUsers(User user) {
+        this.users.add(user);
     }
 }
