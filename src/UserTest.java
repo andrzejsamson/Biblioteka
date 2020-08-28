@@ -56,4 +56,22 @@ public class UserTest {
     public void reservationFail2() {
         assertFalse(user1.reservation(library, book2));
     }
+
+    @Test
+    public void cancelReservationSuccess() {
+        user1.reservation(library,book1);
+        assertTrue(user1.cancelReservation(library,book1));
+        assertEquals(0,book1.getOwnerNumber());
+        assertEquals("free",book1.getStatus());
+    }
+
+    @Test
+    public void cancelReservationFail1() {
+        assertFalse(user2.cancelReservation(library, book2));
+    }
+
+    @Test
+    public void cancelReservationFail2() {
+        assertFalse(user1.cancelReservation(library, book2));
+    }
 }

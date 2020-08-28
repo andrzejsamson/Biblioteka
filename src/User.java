@@ -88,4 +88,19 @@ public class User {
         }
         return false;
     }
+
+    public boolean cancelReservation(Library library, Book book) {
+        if(library.getUsers().contains(this)) {
+            for(Book books : library.getBooks()) {
+                if(book.equals(book) && books.getStatus().equals("reserved") && books.getOwnerNumber() == this.libraryCardNumber) {
+                    books.setStatus("free");
+                    books.setOwnerNumber(0);
+                    return true;
+                }
+            }
+        } else {
+            System.out.println("You are not a user in this library");
+        }
+        return false;
+    }
 }

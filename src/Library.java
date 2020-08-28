@@ -4,11 +4,13 @@ public class Library {
     private String name;
     private ArrayList<Book> books;
     private ArrayList<User> users;
+    private ArrayList<Librarian> librarians;
 
     public Library(String name) {
         this.name = name;
         this.books = new ArrayList<>();
         this.users = new ArrayList<>();
+        this.librarians = new ArrayList<>();
     }
 
     public String getName() {
@@ -33,5 +35,13 @@ public class Library {
 
     public void addUsers(User user) {
         this.users.add(user);
+    }
+
+    public ArrayList<Librarian> getLibrarians() {
+        return librarians;
+    }
+
+    public void addLibrarians(Librarian librarian) {
+        this.librarians.add(librarian);
     }
 }
