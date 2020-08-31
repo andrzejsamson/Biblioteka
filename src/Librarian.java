@@ -32,7 +32,8 @@ public class Librarian extends User {
     public boolean cancelReservation(Library library, Book book, User user) {
         if(library.getLibrarians().contains(this)) {
             for(Book books : library.getBooks()) {
-                if (books.equals(book) && books.getStatus().equals("reserved") && books.getOwnerNumber() == user.getLibraryCardNumber()) {
+                if (books.equals(book) && books.getStatus().equals("reserved") &&
+                        books.getOwnerNumber() == user.getLibraryCardNumber()) {
                     books.setStatus("free");
                     books.setOwnerNumber(0);
                     return true;
@@ -47,7 +48,8 @@ public class Librarian extends User {
     public boolean returnBook(Library library, Book book, User user) {
         if(library.getLibrarians().contains(this)) {
             for(Book books : library.getBooks()) {
-                if (books.equals(book) && books.getStatus().equals("loaned") && books.getOwnerNumber() == user.getLibraryCardNumber()) {
+                if (books.equals(book) && books.getStatus().equals("loaned") &&
+                        books.getOwnerNumber() == user.getLibraryCardNumber()) {
                     books.setStatus("free");
                     books.setOwnerNumber(0);
                     books.setDate(null);
@@ -63,7 +65,8 @@ public class Librarian extends User {
     public boolean loanBook(Library library, Book book, User user) {
         if(library.getLibrarians().contains(this)) {
             for(Book books : library.getBooks()) {
-                if (books.equals(book) && books.getStatus().equals("reserved") && books.getOwnerNumber() == user.getLibraryCardNumber()) {
+                if (books.equals(book) && books.getStatus().equals("reserved") &&
+                        books.getOwnerNumber() == user.getLibraryCardNumber()) {
                     books.setStatus("loaned");
                     DateTimeFormatter dft = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                     LocalDateTime newDate = LocalDateTime.now().plusMonths(2);
@@ -81,6 +84,20 @@ public class Librarian extends User {
         if(library.getLibrarians().contains(this)) {
             library.addBooks(new Book(id,title,author,publishedBy,publishingYear,category,"free",0,null));
             return true;
+        } else {
+            System.out.println("You are not a librarian in this library");
+        }
+        return false;
+    }
+
+    public boolean removeBook(Library library, Book book) {
+        if(library.getLibrarians().contains(this)) {
+            for(Book books : library.getBooks()) {
+                if(books.equals(book) && books.getStatus().equals("free")) {
+                    library.getBooks().remove(books);
+                    return true;
+                }
+            }
         } else {
             System.out.println("You are not a librarian in this library");
         }

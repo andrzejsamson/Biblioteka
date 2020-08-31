@@ -1,22 +1,19 @@
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class LibrarianTest {
-    private static Library library;
-    private static Book book1;
-    private static Book book2;
-    private static Book book3;
-    private static Librarian librarian1;
-    private static Librarian librarian2;
-    private static User user1;
-    private static User user2;
+    private Library library;
+    private Book book1;
+    private Book book2;
+    private Book book3;
+    private Librarian librarian1;
+    private Librarian librarian2;
+    private User user1;
+    private User user2;
 
-    @BeforeClass
-    public static void setup() {
+    @Before
+    public void setup() {
         library = new Library("Library 1");
         book1 = new Book(1,"Title","Author","Publisher","Year","Category","free",0,null);
         book2 = new Book(2,"Title2","Author2","Publisher2","Year2","Category2","reserved",2,null);
@@ -35,11 +32,7 @@ public class LibrarianTest {
 
     @Test
     public void searchSuccess() {
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        assertEquals(4,librarian1.search(library).size());
+        assertEquals(3,librarian1.search(library).size());
     }
 
     @Test
@@ -94,11 +87,10 @@ public class LibrarianTest {
 
     @Test
     public void loanBookSuccess() {
-        user2.reservation(library, book2);
         assertTrue(librarian1.loanBook(library, book2, user2));
         assertEquals(2,book2.getOwnerNumber());
         assertEquals("loaned",book2.getStatus());
-        assertEquals("28-10-2020",book2.getDate());
+        assertEquals("31-10-2020",book2.getDate());
     }
 
     @Test
@@ -119,11 +111,29 @@ public class LibrarianTest {
     @Test
     public void addBookSuccess() {
         assertTrue(librarian1.addBook(library,4,"Title4","Author4","Publisher4","Year4","Category4"));
+        assertEquals(4,library.getBooks().size());
     }
 
     @Test
     public void addBookFail() {
         assertFalse(librarian2.addBook(library,4,"Title4","Author4","Publisher4","Year4","Category4"));
+        assertNotEquals(4,library.getBooks().size());
     }
 
+    @Test
+    public void removeBookSuccess() {
+        assertTrue(librarian1.removeBook(library,book1));
+        assertEquals(2,library.getBooks().size());
+    }
+
+    @Test
+    public void removeBookFail1() {
+        assertFalse(librarian2.removeBook(library,book3));
+    }
+
+    @Test
+    public void removeBookFail2() {
+        assertFalse(librarian1.removeBook(library,book2));
+        assertNotEquals(2,library.getBooks().size());
+    }
 }
