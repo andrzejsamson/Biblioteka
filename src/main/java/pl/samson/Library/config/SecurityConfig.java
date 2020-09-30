@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/library/searchAuthor").permitAll()
                 .antMatchers(HttpMethod.PATCH, "/api/library/reservation").permitAll()
                 .antMatchers(HttpMethod.PATCH, "/api/library/loan").hasAnyRole("LIBRARIAN", "ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/library/returnBook").hasAnyRole("LIBRARIAN", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/library/addBook").hasAnyRole("LIBRARIAN", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/library/changeBook").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/library/deleteBook").hasRole("ADMIN")

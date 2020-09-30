@@ -58,6 +58,11 @@ public class LibraryApi {
         return libraryManager.loan(id);
     }
 
+    @PatchMapping("/returnBook")
+    public String returnBook(@RequestParam Integer id) {
+        return libraryManager.returnBook(id);
+    }
+
     @DeleteMapping("/deleteBook")
     public String deleteBook(@RequestParam Integer id) {
         return libraryManager.deleteById(id);

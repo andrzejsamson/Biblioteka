@@ -62,6 +62,17 @@ public class LibraryManager {
         }
     }
 
+    public String returnBook(int id) {
+        Book book = bookRepo.findById(id).get();
+        if(book.getStatus().equals(Status.LOANED)) {
+            book.setStatus(Status.FREE);
+            bookRepo.save(book);
+            return "Book has been successfully returned";
+        } else {
+            return "You can not return this book";
+        }
+    }
+
     public String deleteById(int id) {
         bookRepo.deleteById(id);
         return "Book has been successfully deleted";
