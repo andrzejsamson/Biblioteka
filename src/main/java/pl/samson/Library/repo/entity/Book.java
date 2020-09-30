@@ -1,9 +1,6 @@
 package pl.samson.Library.repo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Book {
@@ -14,6 +11,8 @@ public class Book {
 
     private String title;
     private String author;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Book() {
